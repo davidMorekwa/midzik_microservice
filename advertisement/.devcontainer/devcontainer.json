@@ -1,0 +1,48 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java
+{
+	"name": "Advertisement Microservice",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	// "build": {
+	// 	"context": "../",
+	// 	"dockerfile": "../docker/Dockerfile",
+	// },
+	// "runArgs":
+    //     "--network", "midzik-springboot-network"
+    // ],
+	"dockerComposeFile": [
+		"../../docker-compose.yml"
+	],
+	"service": "advertisement",
+	"workspaceFolder": "/app",
+	"runServices": ["mysql"],
+	"shutdownAction": "stopCompose",
+	// "features": {
+	// 	"ghcr.io/devcontainers/features/java:1": {
+	// 		"version": "none",
+	// 		"installMaven": "true",
+	// 		"installGradle": "true"
+	// 	},
+	// 	"ghcr.io/devcontainers-extra/features/springboot-sdkman:2": {}
+	// },
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8081,3306],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "cat /etc/os-release; ls -la /app",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack",
+				"vmware.vscode-boot-dev-pack",
+				"redhat.java",
+				"vmware.vscode-spring-boot"
+			]
+		}
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

@@ -1,0 +1,26 @@
+services:
+  advertisement:  
+    build:
+      context: ./advertisement
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+    networks:
+      - midzik-springboot-network
+  mysql:
+    image: mysql/mysql-server:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: advertisement
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - midzik-springboot-network
+networks:
+  midzik-springboot-network:
+    driver: bridge
+  
