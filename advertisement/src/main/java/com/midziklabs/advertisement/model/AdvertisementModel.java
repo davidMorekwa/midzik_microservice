@@ -24,5 +24,6 @@ public class AdvertisementModel {
     private Integer reviewer_id;
     private Boolean is_approved;
     private Integer category_id;
+    private String file_path;
 }
 

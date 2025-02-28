@@ -15,4 +15,5 @@ public class AdvertisementRequest {
     private String title;
     private String description;
     private Integer category_id;
+    private MultipartFile visuals;
 }

@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdvertisementService {
     private final AdvertisementRepository advertisementRepository;
+    private final FileStorageService fileStorageService;
 
     public AdvertisementModel addAdvertisement(AdvertisementRequest request){
         AdvertisementModel model = advertisementRequestToModel(request);
@@ -27,6 +28,7 @@ public class AdvertisementService {
     }
 
     private AdvertisementModel advertisementRequestToModel(AdvertisementRequest request){
+        String file_path = fileStorageService.storeFile(request.getVisuals());
         AdvertisementModel model = new AdvertisementModel();
         model.setTitle(request.getTitle());
         model.setDescription(request.getDescription());
@@ -34,6 +36,7 @@ public class AdvertisementService {
         model.setIs_approved(false);
         model.setReviewer_id(1);
         model.setUser_id(2);
+        model.setFile_path(file_path);
         return model;
     }
 
