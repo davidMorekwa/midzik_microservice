@@ -1,10 +1,12 @@
 package com.midziklabs.advertisement.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.midziklabs.advertisement.model.AdvertisementModel;
+import com.midziklabs.advertisement.model.CategoryModel;
 import com.midziklabs.advertisement.repository.AdvertisementRepository;
 import com.midziklabs.advertisement.request.AdvertisementRequest;
 
@@ -17,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AdvertisementService {
     private final AdvertisementRepository advertisementRepository;
     private final FileStorageService fileStorageService;
+    private final CategoryService categoryService;
 
     public AdvertisementModel addAdvertisement(AdvertisementRequest request){
         AdvertisementModel model = advertisementRequestToModel(request);
@@ -30,9 +33,10 @@ public class AdvertisementService {
     private AdvertisementModel advertisementRequestToModel(AdvertisementRequest request){
         String file_path = fileStorageService.storeFile(request.getVisuals());
         AdvertisementModel model = new AdvertisementModel();
+        Optional<CategoryModel> category = categoryService.getCategoryById(request.getCategory_id());
         model.setTitle(request.getTitle());
         model.setDescription(request.getDescription());
-        model.setCategory_id(request.getCategory_id());
+        model.setCategory(category.get());
         model.setIs_approved(false);
         model.setReviewer_id(1);
         model.setUser_id(2);

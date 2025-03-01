@@ -14,6 +14,6 @@ import lombok.Setter;
 public class AdvertisementRequest {
     private String title;
     private String description;
-    private Integer category_id;
+    private Long category_id;
     private MultipartFile visuals;
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.midziklabs.advertisement.model.AdvertisementModel;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/advertisement")
 @RequiredArgsConstructor
 @Slf4j
@@ -43,7 +44,7 @@ public class AdvertisementController {
             AdvertisementRequest request = new AdvertisementRequest();
             request.setTitle(title);
             request.setDescription(description);
-            request.setCategory_id(Integer.valueOf(category_id));
+            request.setCategory_id(Long.valueOf(category_id));
             request.setVisuals(visuals);
             AdvertisementModel savedAdverisement = advertisementService.addAdvertisement(request);
             URI location = URI.create(String.format("/api/v1/advertisement/%s", savedAdverisement.getId()));

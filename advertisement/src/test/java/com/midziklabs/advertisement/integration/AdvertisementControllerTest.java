@@ -17,10 +17,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.midziklabs.advertisement.controller.AdvertisementController;
 import com.midziklabs.advertisement.model.AdvertisementModel;
+import com.midziklabs.advertisement.model.CategoryModel;
 import com.midziklabs.advertisement.request.AdvertisementRequest;
 import com.midziklabs.advertisement.service.AdvertisementService;
 
@@ -42,25 +44,17 @@ public class AdvertisementControllerTest {
     public void setup(){
         ad1 = new AdvertisementModel();
         ad1.setId(1L);
-        ad1.setCategory_id(1);
+        ad1.setCategory(new CategoryModel("Category 1"));
         ad1.setDescription("Sample description");
         ad1.setIs_approved(false);
         ad1.setReviewer_id(1);
         ad1.setUser_id(2);
         ad1.setTitle("Sample title");
-        // AdvertisementModel ad2 = new AdvertisementModel();
-        // ad2.setId(1L);
-        // ad2.setCategory_id(1);
-        // ad2.setDescription("Sample description 2");
-        // ad2.setIs_approved(false);
-        // ad2.setReviewer_id(1);
-        // ad2.setUser_id(2);
-        // ad2.setTitle("Sample title 2");
         advertisement_list.add(ad1);
         advertisementRequest = new AdvertisementRequest();
         advertisementRequest.setTitle("Test Title");
         advertisementRequest.setDescription("Test Description");
-        advertisementRequest.setCategory_id(1);
+        advertisementRequest.setCategory_id(1L);
     }
 
     /**
@@ -71,10 +65,13 @@ public class AdvertisementControllerTest {
     public void testAddAdvertisement() throws Exception {
         Mockito.when(advertisementService.addAdvertisement(Mockito.any(AdvertisementRequest.class)))
                 .thenReturn(ad1);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/advertisement/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(advertisementRequest))
+        MockMultipartFile visuals = new MockMultipartFile("visuals", "sample.jpg", "image/jpeg", "test image content".getBytes());
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/advertisement/")
+                .file(visuals)
+                .param("title", "Test Title")
+                .param("description", "Test Description")
+                .param("category_id", "1")
+                .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.header().string("Location", "/api/v1/advertisement/1"));
