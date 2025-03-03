@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "midziklabs",
+    "private_key_id": "0aac4046aa7584a0f86d8635eba06c8fecc147d4",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCL8G1h/oMzGgM3\nSCvi6kiFwz1VmekZJeO6mRmElEfWEtmUKLv+ERfHtFHFBNzC44VhbxsyVFMuNS4M\nVeRRMWc3dm8ejkxD5cjBhTeC3PBuqeQbkuLPVHHp6B1qE5cqTJauDfZhPXAd75y7\nVKola72Nazdcz/AFs+Dzin7NGBmbq6ph8o2WU0OEvUa7E/9YJ+wjNitPolAxtkud\no+zrDGXsbuqoEfxLo0YctujI2KRC09RBhj6asSkk7xHQ+nOTFlNyE5w+5cdz8yHi\nu55cYE2qmYSxxLH3qIm80ZW7ls/2wg25wqN+OeK02dYl5zrYEHJdbKL9Hp6LE4jX\nPRmLhiTtAgMBAAECggEAEQUuGKQfCwEX8QpbJB9AsNw9QoMUwdVE7HYgj2qFjjj+\ns7F8o/sqPETnSSI9Q4rutxoPYcC12UHoluF/goyStEE4ZKwEBKIXF8p/JPCAYcVS\nFDR6V6M6s6tioHs/gIqOLR9PnyYc09dH5dT3WNPQ2zl2I1i7JcZqDtUCdSmAO9mo\nM858N/N0514/x+jEqi58I5qtBjPQW6mLEM0X+0MPp3gNjvhTRGsuZpo/fMb68PzI\n2z5p+wG5niBzAWt6uEtMxU/M/LlxrBER8zva432kRc0VlIdoQpiaqDLkKOF5/OTd\nvJ6m5j0rWFiRvhVI2IzaVWPVp9FnQyErA9PRNwNKQQKBgQDAx4JyOztd3xOSDLMz\nHOkoN7100QhSqfdlXly2beCr2guG8FiGBEcrpXVRkKdCNMIj95pcLmb3CKYYRL58\n2YKDH2YPVoFceRu3whDOBqRcgwuFIDMWSQWLr5SBccaIoF2Avf78R4qqHNZWcI6e\njXcOSaWh75oaSF2e1Bo/vdVNUQKBgQC51M2xfHDMy21KPgRpmn9nxmIM9LLlCtDk\nsczbM+E4LQ3lDL2Ifzpa1Yd5ICeg8KCMKCiLkRKVCKjm/RueOCXH44lo66d/EX3n\n0k82vjlVBbmA+mWt/QmIMNaNV6reBA0Lmle5rx5r5jhLoG/+WSAfgDqnZRjkVfd1\nhrC9YsqG3QKBgFHcJjtFhacN0+yfsfSRYTxvtuaE4MjhXalQ0YOx0saGt4BcTOrT\npDkXcGLrTurhJlNJj+V22sgphwYlItI3NqFhUuBOdm4DC08TfDlQPrj9+IVWL/tV\nlKJFM4Vn/8sCddH2W/Fam7oytp1L/HO9VIHfqhLCgKiKdB6+qErK3GmRAoGAY+O7\n3ZfimnMPAEVt4cYmjgXZVtWCBBRYTVY1o+6zNZsiSOkcSG77UzBMbhOWubAe3LgJ\nc1w7/Nh20hNj8RyFUnlAt6FUm70vTJmD8w01jDpTiL0QQwItSYPXEIr7UfQjfwUr\n+qfjVmSeBijrinEmD0jCPpDdXH/JUOdhwauE6hECgYARUiNbA+xk75lkNurxUhLH\nm0cRdmE7VB2Tx2TcMALDAWhRJ6tD5wLRyWg7UFLMjN0yvqKd1DnkIN1g4dS8eguP\njdXKwC7qomC0PUnww9BhGrif/3fj2wB9nveKJIZ1SUwRQGYxrYODwoBGJyWmHB2C\nYiQP4W835LOcMkrD3MyLIQ==\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-ezidz@midziklabs.iam.gserviceaccount.com",
+    "client_id": "118017481197340075897",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ezidz%40midziklabs.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
