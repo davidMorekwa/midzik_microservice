@@ -40,7 +40,7 @@ public class AgeAnalyticsJob {
         }
     }
 
-    @Scheduled(cron = "0 */30 1 * * *")
+    @Scheduled(cron = "0 0 */3 * * *")
     private void analyseAgeData() {
         log.info("------------PROCESSING AGE DATA FROM FIREBASE---------------");
         Map<String, Map<String, Integer>> age_classification_map = new HashMap<>();

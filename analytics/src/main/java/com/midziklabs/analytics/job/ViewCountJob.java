@@ -40,7 +40,7 @@ public class ViewCountJob {
         }
     }
 
-    @Scheduled(cron = "0 */30 1 * * *")
+    @Scheduled(cron = "0 0 */1 * * *")
     private void analyeViewCountData() {
         log.info("------------PROCESSING VIEW COUNT DATA FROM FIREBASE---------------");
         Map<String, Map<String, Integer>> view_counnt_map = new HashMap<>();
