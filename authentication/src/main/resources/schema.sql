@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS t_users;
+DROP TABLE IF EXISTS t_roles;
+
+CREATE TABLE t_roles (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE t_users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    role_id BIGINT,
+    FOREIGN KEY (role_id) REFERENCES t_roles(id)
+);

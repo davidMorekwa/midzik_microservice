@@ -1,0 +1,2 @@
+INSERT INTO t_roles (id, name) VALUES (1, 'Administrator'),  (2, 'Reviewer'), (3, 'User');
+INSERT INTO t_users (id, name, password, email, role_id) VALUES (1, 'admin', '3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b', 'test@mail.com', 1);
