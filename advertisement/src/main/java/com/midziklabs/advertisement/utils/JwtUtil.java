@@ -1,4 +1,4 @@
-package com.midziklabs.gateway.util;
+package com.midziklabs.advertisement.utils;
 
 import java.security.Key;
 import java.util.Date;
@@ -28,6 +28,11 @@ public class JwtUtil {
         byte[] keyBytes = Base64.getDecoder().decode(this.secretKey);
         log.info("Key bytes"+keyBytes.toString());
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public String extractUsername(String token) {
+        Claims c = extractClaims(token);
+        return c.getSubject();
     }
 
     public Claims extractClaims(String token) {

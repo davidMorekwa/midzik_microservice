@@ -14,11 +14,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class JwtService {
 
     @Value("${security.jwt.secret-key}")
@@ -66,9 +71,31 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    public boolean isTokenValid(String token) {
+        Key secretKey = getSignInKey();
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            // Perform additional checks if needed (e.g., issuer, audience)
+            return !isTokenExpired(claims);
+
+        } catch (ExpiredJwtException e) {
+            log.error("Token expired", e.getMessage());
+            return false; // Token expired
+        } catch (MalformedJwtException e) {
+            log.error("Malformed JWT token", e.getMessage());
+            return false; // Malformed token
+        } catch (SignatureException e) {
+            log.error("Invalid JWT token signature", e.getMessage());
+            return false; // Invalid signature
+        } catch (Exception e) {
+            log.error("an erro occured when trying to validate JWT token", e.getMessage());
+            return false; // Other exceptions
+        }
     }
 
     public boolean hasRole(String token, String requiredRole) {
@@ -76,8 +103,8 @@ public class JwtService {
         return roles.contains(requiredRole);
     }
 
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+    private boolean isTokenExpired(Claims claims) {
+        return claims.getExpiration().before(new Date());
     }
 
     private Date extractExpiration(String token) {
