@@ -40,6 +40,11 @@ public class GatewayApplication {
 					.filters(f -> f.filter(jwtValidationFilter.apply(new JwtValidationGatewayFilterFactory.Config())))
 					.uri("lb://advertisement")
 				)
+				.route("analytics", r -> r
+					.path("/api/v1/analytics/**")
+					.filters(f -> f.filter(jwtValidationFilter.apply(new JwtValidationGatewayFilterFactory.Config())))
+					.uri("lb://analytics")
+				)
 				.build();
 	}
 

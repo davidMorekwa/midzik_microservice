@@ -48,6 +48,7 @@ public class AnalyticsService {
             }
         } catch (InterruptedException | ExecutionException e) {
             log.error("An error occurred when trying to fetch gender analytics data", e.getMessage());
+            log.error("error", e);
             return null;
         }   
     }
