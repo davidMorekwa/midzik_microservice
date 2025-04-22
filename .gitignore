@@ -1,2 +1,3 @@
 # Add docker volume for mysql
 /db
+/kubernetes

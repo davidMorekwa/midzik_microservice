@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: advertisement
+  labels:
+    app: advertisement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: advertisement
+  template:
+    metadata:
+      labels:
+        app: advertisement
+    spec:
+      containers:
+        - name: advertisement
+          image: ghcr.io/davidmorekwa/advertisement:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: database_url
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: database_username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: database_password
