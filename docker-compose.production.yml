@@ -1,8 +1,6 @@
 services:
   registry:
-    build: 
-      context: ./service-registry
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/registry:latest
     container_name: registry
     ports:
       - "8761:8761"
@@ -20,9 +18,7 @@ services:
       retries: 3
       test: ["CMD-SHELL", "curl --fail --silent -H 'X-User-Roles: User' http://localhost:8761/actuator/health || exit 1"]
   gateway:
-    build:
-      context: ./gateway
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/gateway:v1.0
     container_name: gateway
     ports:
       - "8080:8080"
@@ -64,9 +60,7 @@ services:
       start_period: 30s
 
   advertisement:  
-    build:
-      context: ./advertisement
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/advertisement:v1.0
     container_name: advertisement
     ports:
       - "8081:8081"
@@ -91,9 +85,7 @@ services:
       authentication:
         condition: service_started
   authentication:
-    build: 
-      context: ./authentication
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/authentication:v1.0
     container_name: authentication
     ports:
       - "8082:8082"
@@ -110,9 +102,7 @@ services:
       registry:
         condition: service_healthy
   analytics:
-    build: 
-      context: ./analytics
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/analytics:v1.0
     container_name: analytics
     ports:
       - "8083:8083"
@@ -137,9 +127,7 @@ services:
         condition: service_started
       
   payments:
-    build: 
-      context: ./payments
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/payments:v1.0
     ports:
       - "8084:8084"
     container_name: payments
@@ -164,9 +152,7 @@ services:
       advertisement:
         condition: service_started
   notification:
-    build: 
-      context: ./notification
-      dockerfile: ./docker/Dockerfile
+    image: ghcr.io/davidmorekwa/notification:v1.0
     container_name: notification
     ports:
       - "8085:8085"
@@ -215,6 +201,12 @@ services:
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
     networks:
       - midzik-springboot-network
+  
+  frontend:
+    image: ghcr.io/midziklabs/frontend:v1.0
+    ports:
+      - "80:3000"
+    container_name: frontend
 
 networks:
   midzik-springboot-network:
