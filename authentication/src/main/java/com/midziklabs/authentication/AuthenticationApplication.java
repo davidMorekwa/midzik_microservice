@@ -8,9 +8,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EntityScan(basePackages = {"com.midziklabs.authentication.model"})
+@EntityScan("com.midziklabs.authentication.model")
 public class AuthenticationApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(AuthenticationApplication.class, args);
 	}

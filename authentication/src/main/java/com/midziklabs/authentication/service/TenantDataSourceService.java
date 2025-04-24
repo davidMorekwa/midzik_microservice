@@ -25,15 +25,15 @@ public class TenantDataSourceService {
     private final Map<String, DataSource> dataSourceMap = new HashMap<>();
 
 
-    @PostConstruct
-    public void init(){
-        // Fetch tenant IDs from the Config Server
-        String[] tenantIds = {"tenant-a", "tenant-b"}; // Replace with actual tenant IDs
+    // @PostConstruct
+    // public void init(){
+    //     // Fetch tenant IDs from the Config Server
+    //     String[] tenantIds = {"tenant-a", "tenant-b"}; // Replace with actual tenant IDs
 
-        for (String tenantId : tenantIds) {
-            fetchAndCreateDataSource(tenantId);
-        }
-    }
+    //     for (String tenantId : tenantIds) {
+    //         fetchAndCreateDataSource(tenantId);
+    //     }
+    // }
     private DataSource createDataSource(String jdbcUrl, String username, String password, String driverClassName) {
         return DataSourceBuilder.create()
                 .url(jdbcUrl)
@@ -47,6 +47,14 @@ public class TenantDataSourceService {
     public Map<String, DataSource> getDataSource() {
         return dataSourceMap;   
     }
+
+    public DataSource getDataSource(String tenantid){
+        if(!dataSourceMap.containsKey(tenantid)){
+            fetchAndCreateDataSource(tenantid);
+        }
+        return dataSourceMap.get(tenantid);
+    }
+
     private void fetchAndCreateDataSource(String tenantId) {
         String configUrl = String.format("%s/%s/default", configServerUri, tenantId); // Construct tenant-specific endpoint
 
