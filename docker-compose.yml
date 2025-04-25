@@ -13,12 +13,12 @@ services:
         condition: service_started
       mysql:
         condition: service_healthy
-    healthcheck:
-      interval: 30s
-      timeout: 10s
-      start_period: 2m
-      retries: 3
-      test: ["CMD-SHELL", "curl --fail --silent -H 'X-User-Roles: User' http://localhost:8761/actuator/health || exit 1"]
+#    healthcheck:
+#     interval: 30s
+#      timeout: 10s
+#      start_period: 2m
+#      retries: 3
+#      test: ["CMD-SHELL", "curl --fail --silent -H 'X-User-Roles: User' http://localhost:8761/actuator/health || exit 1"]
   gateway:
     build:
       context: ./gateway
@@ -150,7 +150,7 @@ services:
       kafka:
         condition: service_started
       registry:
-        condition: service_healthy
+        condition: service_started
   analytics:
     build: 
       context: ./analytics
@@ -257,6 +257,22 @@ services:
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
     networks:
       - midzik-springboot-network
+  config:
+    build:
+      context: ./multi-tenant-config/demo
+      dockerfile: ./docker/Dockerfile
+    container_name: config
+    ports:
+      - "8888:8888"
+    networks:
+      - midzik-springboot-network
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://registry:8761/eureka
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mysql2:
+        condition: service_healthy
 
 networks:
   midzik-springboot-network:

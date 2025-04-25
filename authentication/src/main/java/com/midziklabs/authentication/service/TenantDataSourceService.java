@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TenantDataSourceService {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private String configServerUri = "http://localhost:8888";
+    private String configServerUri = "http://config:8888";
 
     private final Map<String, DataSource> dataSourceMap = new HashMap<>();
 
