@@ -1,0 +1,20 @@
+# Ignore Maven target directory
+target/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Git files
+.git
+.gitignore
