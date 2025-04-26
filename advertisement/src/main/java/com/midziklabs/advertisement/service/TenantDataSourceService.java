@@ -1,4 +1,4 @@
-package com.midziklabs.authentication.service;
+package com.midziklabs.advertisement.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,7 @@ public class TenantDataSourceService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private String configServerUri = "http://config:8888";
-    // private String configServerUri = "http://localhost:8888";
+    // private String configServerUri = "http://localhost:8888"; // Replace with your actual Config Server URI
 
     private final Map<String, DataSource> dataSourceMap = new HashMap<>();
 
@@ -39,6 +39,7 @@ public class TenantDataSourceService {
         return DataSourceBuilder.create()
                 .url(jdbcUrl)
                 .username(username)
+                
                 .password(password)
                 .driverClassName(driverClassName)
                 .type(HikariDataSource.class)
@@ -69,14 +70,13 @@ public class TenantDataSourceService {
                     if (propertySource.containsKey("source")) {
                         Map<String, String> source = (Map<String, String>) propertySource.get("source");
                         log.info(configUrl + " " + source);
-                        String url = source.get("spring.authentication.datasource.url");
-                        String username = source.get("spring.authentication.datasource.username");
-                        String password = source.get("spring.authentication.datasource.password");
-                        String driverClassName = source.get("spring.authentication.datasource.driver-class-name");
+                        String url = source.get("spring.advertisement.datasource.url");
+                        String username = source.get("spring.advertisement.datasource.username");
+                        String password = source.get("spring.advertisement.datasource.password");
+                        String driverClassName = source.get("spring.advertisement.datasource.driver-class-name");
 
                         if (url != null && username != null && password != null && driverClassName != null) {
                             DataSource ds = createDataSource(url, username, password, driverClassName);
-                            log.info("DataSOurce: " + ds);
                             dataSourceMap.put(tenantId, ds);
                         }
                     }

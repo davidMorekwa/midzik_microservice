@@ -1,4 +1,4 @@
-package com.midziklabs.authentication.utils;
+package com.midziklabs.advertisement.utils;
 
 import java.io.IOException;
 
@@ -18,7 +18,6 @@ public class TenentIdFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        log.info("Starting TenantId filter");
         String tenantId = request.getHeader("X-TenantID");
         log.info("TenentIdFilter tenantId: " + tenantId);
         try {

@@ -3,6 +3,7 @@ package com.midziklabs.advertisement.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,9 +23,13 @@ public class LocationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "address")
     private String address;
+    @Column(name = "county")
     private String county;
+    @Column(name = "price")
     private Double price;
     // @ManyToMany(mappedBy = "location")
     // private Set<AdvertisementModel> advertisements = new HashSet<>();

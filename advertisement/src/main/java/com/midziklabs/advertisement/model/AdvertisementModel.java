@@ -2,6 +2,7 @@ package com.midziklabs.advertisement.model;
 
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,10 +27,15 @@ public class AdvertisementModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "description")
     private String description;
+    @Column(name = "user_id")
     private Integer userId;
+    @Column(name = "reviewer_id")
     private Integer reviewer_id;
+    @Column(name = "status")
     private String status;
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = true)
@@ -41,7 +47,9 @@ public class AdvertisementModel {
         inverseJoinColumns = @JoinColumn(name = "location_id")
     )
     private Set<LocationModel> location;
+    @Column(name = "file_path")
     private String file_path;
+    @Column(name = "loops")
     private Integer loops;
 }
 

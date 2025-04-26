@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface AuthenticationClient {
 
     @GetMapping("/auth-user")
-    ResponseEntity<?> getAuthenticatedUser(@RequestHeader("Authorization") String authorizationHeader);
+    ResponseEntity<?> getAuthenticatedUser(@RequestHeader("Authorization") String authorizationHeader, @RequestHeader("X-TenantID") String tenantId);
     
 }
