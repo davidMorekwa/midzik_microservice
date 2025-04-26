@@ -36,6 +36,7 @@ import com.midziklabs.advertisement.requestDto.AdvertisementRejectionRequest;
 import com.midziklabs.advertisement.requestDto.AdvertisementRequest;
 import com.midziklabs.advertisement.responseDto.AdvertisementByUserResponse;
 import com.midziklabs.advertisement.responseDto.AdvertisementWithUserResponse;
+import com.midziklabs.advertisement.utils.CurrentTenantHolder;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -109,7 +110,7 @@ public class AdvertisementService {
 
     public List<AdvertisementModel> getAdvertisementByUser(String token) throws Exception{
         try {
-            ResponseEntity<?> response = authenticationClient.getAuthenticatedUser(token);
+            ResponseEntity<?> response = authenticationClient.getAuthenticatedUser(token, CurrentTenantHolder.getCurrentTenant());
             log.info("Response:");
             if (response.getStatusCode() != HttpStatusCode.valueOf(200)) {
                 throw new Exception();

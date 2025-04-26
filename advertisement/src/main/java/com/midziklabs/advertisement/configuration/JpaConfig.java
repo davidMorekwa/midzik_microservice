@@ -1,4 +1,4 @@
-package com.midziklabs.authentication.configuration;
+package com.midziklabs.advertisement.configuration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,22 +32,26 @@ public class JpaConfig {
     //             .properties(jpaProperties)
     //             .build();
     // }
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource tenantDataSource) {
 
-        Map<String, Object> jpaPropertiesMap = new HashMap<>(); // Renamed for clarity
-        jpaPropertiesMap.put("hibernate.hbm2ddl.auto", "none");
-        jpaPropertiesMap.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        // Map<String, Object> jpaPropertiesMap = new HashMap<>(); // Renamed for clarity
+        // jpaPropertiesMap.put("hibernate.hbm2ddl.auto", "update");
+        // jpaPropertiesMap.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 
         Properties jpaProperties = new Properties();
-        jpaProperties.putAll(jpaPropertiesMap);
+        jpaProperties.put("hibernate.hbm2ddl.auto", "update");
+        // jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        jpaProperties.put("hibernate.show_sql", true);
+        jpaProperties.put("hibernate.format_sql", true);
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.midziklabs.authentication.model");
+        factory.setPackagesToScan("com.midziklabs.advertisement");
         factory.setJpaProperties(jpaProperties);
         factory.setDataSource(tenantDataSource);
         factory.setPersistenceUnitName("multiTenantPU");
